@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Checkout</h1>
+{% for product, quantity, subtotal in items %}
+<p>{{ product.name }} × {{ quantity }} — £{{ "%.2f"|format(subtotal) }}</p>
+{% endfor %}
+<h2>Total: £{{ "%.2f"|format(total) }}</h2>
+<form method="post"><button>Place order</button></form>
+{% endblock %}

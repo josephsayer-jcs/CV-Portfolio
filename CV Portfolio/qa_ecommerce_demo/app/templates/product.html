@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ product.name }}</h1>
+<p>{{ product.description }}</p>
+<p>Category: {{ product.category }}</p>
+<p>Stock: {{ product.stock }}</p>
+<p class="price">£{{ "%.2f"|format(product.price) }}</p>
+<form method="post" action="{{ url_for('web.add_to_cart', product_id=product.id) }}">
+  <input type="number" name="quantity" value="1" min="1">
+  <button>Add to basket</button>
+</form>
+{% endblock %}

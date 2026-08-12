@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Order History</h1>
+{% if orders %}
+<table>
+<tr><th>Order</th><th>Total</th><th>Status</th><th>Date</th></tr>
+{% for order in orders %}
+<tr><td>#{{ order.id }}</td><td>£{{ "%.2f"|format(order.total) }}</td><td>{{ order.status }}</td><td>{{ order.created_at }}</td></tr>
+{% endfor %}
+</table>
+{% else %}
+<p>No orders yet.</p>
+{% endif %}
+{% endblock %}

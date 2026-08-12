@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>QA Shop</h1>
+<form method="get">
+  <input name="q" value="{{ query }}" placeholder="Search products">
+  <button>Search</button>
+</form>
+<div class="grid">
+{% for product in products %}
+  <div class="card">
+    <h2><a href="{{ url_for('web.product', product_id=product.id) }}">{{ product.name }}</a></h2>
+    <p>{{ product.description }}</p>
+    <p>Category: {{ product.category }}</p>
+    <p>Stock: {{ product.stock }}</p>
+    <p class="price">£{{ "%.2f"|format(product.price) }}</p>
+    <form method="post" action="{{ url_for('web.add_to_cart', product_id=product.id) }}">
+      <input type="number" name="quantity" value="1" min="1">
+      <button>Add to basket</button>
+    </form>
+  </div>
+{% else %}
+  <p>No products found.</p>
+{% endfor %}
+</div>
+{% endblock %}

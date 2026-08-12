@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QA Shop</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 1000px; margin: 30px auto; padding: 0 20px; color: #222; }
+    nav { display:flex; gap:15px; padding-bottom:20px; border-bottom:1px solid #ddd; margin-bottom:25px; }
+    a { color:#165dcc; text-decoration:none; } a:hover{text-decoration:underline;}
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .card { border:1px solid #ddd; border-radius:8px; padding:18px; }
+    .price { font-size:1.3em; font-weight:bold; }
+    input, button { padding:9px; margin:4px 0; }
+    button { cursor:pointer; }
+    .flash { background:#fff3cd; padding:10px; margin:10px 0; border-radius:5px; }
+    table { border-collapse:collapse; width:100%; } th,td { border-bottom:1px solid #ddd; padding:10px; text-align:left; }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="{{ url_for('web.index') }}">Products</a>
+  <a href="{{ url_for('web.cart') }}">Basket</a>
+  {% if user %}
+    <a href="{{ url_for('web.orders') }}">Orders</a>
+    <span style="margin-left:auto">Logged in as {{ user.username }} | <a href="{{ url_for('web.logout') }}">Logout</a></span>
+  {% else %}
+    <span style="margin-left:auto"><a href="{{ url_for('web.login') }}">Login</a> | <a href="{{ url_for('web.register') }}">Register</a></span>
+  {% endif %}
+</nav>
+{% with messages = get_flashed_messages() %}
+  {% for message in messages %}<div class="flash">{{ message }}</div>{% endfor %}
+{% endwith %}
+{% block content %}{% endblock %}
+</body>
+</html>
